@@ -37,7 +37,7 @@ nonebot_plugin_status
 ```
 /help help
 
-@<user_who_send_command> 输入/help 获取使用方法
+@<user_who_send_command> 欢迎使用Nonebot 2 Help Plugin，请输入/help 获取使用方法
 ```
 
 若插件未提供__usage__，则会显示__doc__，示例：
