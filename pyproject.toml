@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "nonebot-plugin-help"
+version = "0.1.0"
+description = "A general help lister for nonebot2 plugins"
+authors = ["XZhouQD <X.Zhou.QD@hotmail.com>"]
+license = "AGPL v3"
+readme = "README.md"
+homepage = "https://github.com/XZhouQD/nonebot-plugin-help"
+repository = "https://github.com/XZhouQD/nonebot-plugin-help"
+include = [
+    "LICENSE",
+]
+
+[tool.poetry.dependencies]
+python = "^3.7.3"
+nonebot2 = "^2.0.0-alpha.10"
+nonebot-adapter-cqhttp = "^2.0.0a11.post2"
+
+[tool.poetry.dev-dependencies]
+nb-cli = "^0.4.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
