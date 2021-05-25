@@ -11,7 +11,7 @@ helper = on_command("help", priority=1, aliases={"帮助"})
 @helper.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State):
     args = str(event.get_message()).strip()
-    logger.info(args)
+    logger.debug(args)
     if args:
         state["content"] = args
     else:
@@ -55,7 +55,8 @@ async def get_result(bot: Bot, event: Event, state: T_State):
 
 
 async def get_help():
-    return f'''您已键入/help命令，现为您展示此命令相关帮助：
-/help list  展示已加载插件列表
-/help <plugin_name>  调取目标插件帮助信息
+    return '''欢迎使用Nonebot 2 Help Plugin
+/help  # 获取本插件帮助
+/help list  # 展示已加载插件列表
+/help <plugin_name>  # 调取目标插件帮助信息
 '''

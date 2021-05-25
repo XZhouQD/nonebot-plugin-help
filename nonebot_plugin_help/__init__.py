@@ -14,7 +14,11 @@ _sub_plugins = set()
 _sub_plugins |= nonebot.load_plugins(
     str((Path(__file__).parent / "plugins").resolve()))
 
-__usage__ = '欢迎使用Nonebot 2 Help Plugin，请输入/help 获取使用方法'
+__usage__ = '''欢迎使用Nonebot 2 Help Plugin
+/help  # 获取本插件帮助
+/help list  # 展示已加载插件列表
+/help <plugin_name>  # 调取目标插件帮助信息
+'''
 
 __version__ = '0.1.1'
 
