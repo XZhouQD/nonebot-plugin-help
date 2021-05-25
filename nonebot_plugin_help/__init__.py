@@ -20,7 +20,7 @@ __usage__ = '''欢迎使用Nonebot 2 Help Plugin
 /help <plugin_name>  # 调取目标插件帮助信息
 '''
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 __plugin_name__ = "XZhouQD's Help Menu"
 
