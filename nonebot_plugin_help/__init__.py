@@ -24,7 +24,7 @@ __usage__ = f'''欢迎使用Nonebot 2 Help Plugin
 {default_start}help <plugin_name>  # 调取目标插件帮助信息
 '''
 
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 __help_plugin_name__ = "XZhouQD's Help Menu"
 

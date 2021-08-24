@@ -30,11 +30,10 @@ async def get_result(bot: Bot, event: Event, state: T_State):
         plugin_names = []
         for plugin in plugin_set:
             try:
-                name = f'{plugin.name}: ' \
+                name = f'{plugin.name} | ' \
                     f'{plugin.module.__getattribute__("__help_plugin_name__")}'
             except:
-                name = f'{plugin.name} | ' \
-                    f'{plugin.module.__getattribute__("__plugin_name__")}'
+                name = f'{plugin.name}'
             try:
                 version = plugin.module.__getattribute__("__help_version__")
             except:
