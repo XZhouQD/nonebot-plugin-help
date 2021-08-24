@@ -5,7 +5,9 @@ from nonebot.adapters import Bot, Event
 from nonebot.adapters.cqhttp.message import Message, MessageSegment
 from nonebot.log import logger
 
+
 helper = on_command("help", priority=1, aliases={"帮助"})
+default_start = list(nonebot.get_driver().config.command_start)[0]
 
 
 @helper.handle()
@@ -28,11 +30,13 @@ async def get_result(bot: Bot, event: Event, state: T_State):
         plugin_names = []
         for plugin in plugin_set:
             try:
-                name = f'{plugin.name}: {plugin.module.__getattribute__("__plugin_name__")}'
+                name = f'{plugin.name}: ' \
+                    f'{plugin.module.__getattribute__("__help_plugin_name__")}'
             except:
-                name = plugin.name
+                name = f'{plugin.name} | ' \
+                    f'{plugin.module.__getattribute__("__plugin_name__")}'
             try:
-                version = plugin.module.__getattribute__("__version__")
+                version = plugin.module.__getattribute__("__help_version__")
             except:
                 version = ""
             plugin_names.append(f'{name} {version}')
@@ -51,12 +55,14 @@ async def get_result(bot: Bot, event: Event, state: T_State):
                 result = plugin.module.__doc__
             except AttributeError:
                 result = f'{state.get("content")}插件不存在或未加载'
-    await helper.finish(Message().append(at).append(MessageSegment.text(result)))
+    await helper.finish(Message().append(at).append(
+        MessageSegment.text(result)))
 
 
 async def get_help():
-    return '''欢迎使用Nonebot 2 Help Plugin
-/help  # 获取本插件帮助
-/help list  # 展示已加载插件列表
-/help <plugin_name>  # 调取目标插件帮助信息
+    return f'''欢迎使用Nonebot 2 Help Plugin
+支持使用的前缀：{" ".join(list(nonebot.get_driver().config.command_start))}
+{default_start}help  # 获取本插件帮助
+{default_start}help list  # 展示已加载插件列表
+{default_start}help <plugin_name>  # 调取目标插件帮助信息
 '''

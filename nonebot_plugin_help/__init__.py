@@ -8,20 +8,24 @@ import nonebot
 
 from .handler import helper
 
+
+default_start = list(nonebot.get_driver().config.command_start)[0]
+
 # store all subplugins
 _sub_plugins = set()
 # load sub plugins
 _sub_plugins |= nonebot.load_plugins(
     str((Path(__file__).parent / "plugins").resolve()))
 
-__usage__ = '''欢迎使用Nonebot 2 Help Plugin
-/help  # 获取本插件帮助
-/help list  # 展示已加载插件列表
-/help <plugin_name>  # 调取目标插件帮助信息
+__usage__ = f'''欢迎使用Nonebot 2 Help Plugin
+支持使用的前缀：{" ".join(list(nonebot.get_driver().config.command_start))}
+{default_start}help  # 获取本插件帮助
+{default_start}help list  # 展示已加载插件列表
+{default_start}help <plugin_name>  # 调取目标插件帮助信息
 '''
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
-__plugin_name__ = "XZhouQD's Help Menu"
+__help_plugin_name__ = "XZhouQD's Help Menu"
 
-nonebot.export().help = helper
+nonebot.export.help = helper
