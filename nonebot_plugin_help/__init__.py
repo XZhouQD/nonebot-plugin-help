@@ -18,13 +18,11 @@ _sub_plugins |= nonebot.load_plugins(
     str((Path(__file__).parent / "plugins").resolve()))
 
 __usage__ = f'''欢迎使用Nonebot 2 Help Plugin
-支持使用的前缀：{" ".join(list(nonebot.get_driver().config.command_start))}
-{default_start}help  # 获取本插件帮助
-{default_start}help list  # 展示已加载插件列表
-{default_start}help <plugin_name>  # 调取目标插件帮助信息
+本插件提供公共帮助菜单能力
+此Bot配置的命令前缀：{" ".join(list(nonebot.get_driver().config.command_start))}
 '''
 
-__version__ = '0.1.4'
+__help_version__ = '0.1.5'
 
 __help_plugin_name__ = "XZhouQD's Help Menu"
 

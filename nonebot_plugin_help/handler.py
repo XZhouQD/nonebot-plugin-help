@@ -6,8 +6,12 @@ from nonebot.adapters.cqhttp.message import Message, MessageSegment
 from nonebot.log import logger
 
 
-helper = on_command("help", priority=1, aliases={"帮助"})
 default_start = list(nonebot.get_driver().config.command_start)[0]
+helper = on_command("help", priority=1, aliases={"帮助"})
+helper.__help_name__ = 'help'
+helper.__help_info__ = f'''{default_start}help  # 获取本插件帮助
+{default_start}help list  # 展示已加载插件列表
+{default_start}help <plugin_name>  # 调取目标插件帮助信息'''
 
 
 @helper.handle()
@@ -48,7 +52,28 @@ async def get_result(bot: Bot, event: Event, state: T_State):
         except AttributeError:
             plugin = None
         try:
-            result = plugin.module.__getattribute__("__usage__")
+            matchers = plugin.matcher
+            infos = {}
+            index = 1
+            for matcher in matchers:
+                try:
+                    name = matcher.__help_name__
+                except AttributeError:
+                    name = None
+                try:
+                    help_info = matcher.__help_info__
+                except AttributeError:
+                    help_info = matcher.__doc__
+                if name and help_info:
+                    infos[f'{index}. {name}'] = help_info
+                    index += 1
+            results = [plugin.module.__getattribute__("__usage__"),
+                       "", "序号. 命令名: 命令用途"]
+            results.extend(
+                [f'{key}: {value}' for key, value in infos.items()
+                 if key and value]
+            )
+            result = '\n'.join(results)
         except:
             try:
                 result = plugin.module.__doc__
