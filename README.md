@@ -1,7 +1,30 @@
-# nonebot-plugin-help
-A general help plugin for nonebot2
+<div align="center">
 
-为nonebot2插件提供泛用的帮助列表
+# nonebot-plugin-help
+### Nonebot2 轻量级帮助插件
+
+<a href="https://raw.githubusercontent.com/xzhouqd/nonebot-plugin-help/main/LICENSE">
+    <img src="https://img.shields.io/github/license/xzhouqd/nonebot-plugin-help?style=for-the-badge" alt="license">
+</a>
+<a href="https://pypi.python.org/pypi/nonebot-plugin-help">
+    <img src="https://img.shields.io/pypi/v/nonebot-plugin-help?color=green&style=for-the-badge" alt="pypi">
+</a>
+<img src="https://img.shields.io/badge/python-3.7.3+-blue?style=for-the-badge" alt="python">
+<br />
+<img src="https://img.shields.io/badge/tested_python-3.8.9-blue?style=for-the-badge" alt="python">
+<img src="https://img.shields.io/static/v1?label=tested+env&message=go-cqhttp+1.0.0-beta8-fix1&color=blue&style=for-the-badge" alt="python">
+
+<br />
+<a href="https://github.com/botuniverse/onebot/blob/master/README.md">
+    <img src="https://img.shields.io/badge/Onebot-v11-brightgreen?style=for-the-badge" alt="onebot">
+</a>
+<a href="https://github.com/nonebot/nonebot2">
+    <img src="https://img.shields.io/badge/Nonebot-2.0.0a16-red?style=for-the-badge" alt="nonebot">
+</a>
+<a href="https://pypi.org/project/nonebot-adapter-cqhttp/">
+    <img src="https://img.shields.io/static/v1?label=Nonebot-adapters-cqhttp&message=2.0.0a16&color=red&style=for-the-badge" alt="nonebot-adapters-cqhttp">
+</a>
+</div>
 
 ## 开发者接入此插件列表方法
 ### 包级别接入
