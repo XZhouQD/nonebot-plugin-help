@@ -34,7 +34,7 @@
 __usage__ = '您想在使用命令/help <your plugin package name>时提供的帮助文本'
 
 # 您的插件版本号，将在/help list中显示
-__help__version__ = '0.1.4' 
+__help__version__ = '0.1.6' 
 
 # 此名称有助于美化您的插件在/help list中的显示
 # 但使用/help xxx查询插件用途时仍必须使用包名

@@ -22,7 +22,7 @@ __usage__ = f'''欢迎使用Nonebot 2 Help Plugin
 此Bot配置的命令前缀：{" ".join(list(nonebot.get_driver().config.command_start))}
 '''
 
-__help_version__ = '0.1.5'
+__help_version__ = '0.1.6'
 
 __help_plugin_name__ = "XZhouQD's Help Menu"
 
