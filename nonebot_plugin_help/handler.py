@@ -1,8 +1,7 @@
 import nonebot.plugin
 from nonebot import on_command
 from nonebot.matcher import Matcher
-from nonebot.params import CommandArg, State, Arg
-from nonebot.typing import T_State
+from nonebot.params import CommandArg, Arg
 from nonebot.adapters import Event
 from nonebot.adapters.onebot.v11.message import Message, MessageSegment
 from nonebot.log import logger
