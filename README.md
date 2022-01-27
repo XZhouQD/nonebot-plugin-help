@@ -11,18 +11,18 @@
 </a>
 <img src="https://img.shields.io/badge/python-3.7.3+-blue?style=for-the-badge" alt="python">
 <br />
-<img src="https://img.shields.io/badge/tested_python-3.8.9-blue?style=for-the-badge" alt="python">
-<img src="https://img.shields.io/static/v1?label=tested+env&message=go-cqhttp+1.0.0-beta8-fix1&color=blue&style=for-the-badge" alt="python">
+<img src="https://img.shields.io/badge/tested_python-3.8.10-blue?style=for-the-badge" alt="python">
+<img src="https://img.shields.io/static/v1?label=tested+env&message=go-cqhttp+1.0.0-beta8-fix2&color=blue&style=for-the-badge" alt="python">
 
 <br />
 <a href="https://github.com/botuniverse/onebot/blob/master/README.md">
     <img src="https://img.shields.io/badge/Onebot-v11-brightgreen?style=for-the-badge" alt="onebot">
 </a>
 <a href="https://github.com/nonebot/nonebot2">
-    <img src="https://img.shields.io/badge/Nonebot-2.0.0a16-red?style=for-the-badge" alt="nonebot">
+    <img src="https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red&style=for-the-badge" alt="nonebot">
 </a>
 <a href="https://pypi.org/project/nonebot-adapter-cqhttp/">
-    <img src="https://img.shields.io/static/v1?label=Nonebot-adapters-cqhttp&message=2.0.0a16&color=red&style=for-the-badge" alt="nonebot-adapters-cqhttp">
+    <img src="https://img.shields.io/static/v1?label=Nonebot-adapters-onebot&message=2.0.0%2Dbeta.1&color=red&style=for-the-badge" alt="nonebot-adapters-cqhttp">
 </a>
 </div>
 
@@ -34,7 +34,7 @@
 __usage__ = '您想在使用命令/help <your plugin package name>时提供的帮助文本'
 
 # 您的插件版本号，将在/help list中显示
-__help__version__ = '0.1.6' 
+__help__version__ = '0.2.1' 
 
 # 此名称有助于美化您的插件在/help list中的显示
 # 但使用/help xxx查询插件用途时仍必须使用包名
