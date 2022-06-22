@@ -10,8 +10,8 @@ from .handler import helper
 default_start = list(nonebot.get_driver().config.command_start)[0]
 
 # Legacy way of self registering (use custom attributes)
-# __help_version__ is still active in-use since PluginMetadata does not include it
-__help_version__ = '0.3.0'
+# Deprecated for nonebot-plugin-help 0.3.1+, prefer PluginMetadata.extra['version']
+__help_version__ = '0.3.1'
 # Deprecated for nonebot-plugin-help 0.3.0+, prefer PluginMetadata.name
 __help_plugin_name__ = "Nonebot2 Help Menu"
 # Deprecated for nonebot-plugin-help 0.3.0+, prefer PluginMetadata.usage
@@ -31,5 +31,6 @@ __plugin_meta__ = nonebot.plugin.PluginMetadata(
 {default_start}help  # 获取本插件帮助
 {default_start}help list  # 展示已加载插件列表
 {default_start}help <插件名>  # 调取目标插件帮助信息
-'''
+''',
+    extra={'version': '0.3.1'}
 )

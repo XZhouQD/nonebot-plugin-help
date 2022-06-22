@@ -4,7 +4,6 @@ from nonebot.matcher import Matcher
 from nonebot.params import CommandArg, Arg
 from nonebot.adapters import Event
 from nonebot.adapters.onebot.v11.message import Message, MessageSegment
-from nonebot.log import logger
 
 default_start = list(nonebot.get_driver().config.command_start)[0]
 helper = on_command("help", priority=1, aliases={"帮助"})
@@ -32,33 +31,45 @@ async def handle_first_receive(event: Event, matcher: Matcher, args: Message = C
 @helper.got("content")
 async def get_result(event: Event, content: Message = Arg()):
     at = MessageSegment.at(event.get_user_id())
-    args = content.extract_plain_text().split()
-    logger.warning(args)
-    if str(args[0]).lower() == "list":
+    arg = content.extract_plain_text().strip()
+    if arg.lower() == "list":
         plugin_set = nonebot.plugin.get_loaded_plugins()
         plugin_names = []
         for plugin in plugin_set:
             # plugin.name, then metadata name or legacy help name
             name = f'{plugin.name} | '
             try:
-                name += plugin.metadata.name if plugin.metadata.name \
+                name += plugin.metadata.name if plugin.metadata and plugin.metadata.name \
                     else plugin.module.__getattribute__("__help_plugin_name__")
             except:
                 name = plugin.name
-            # version is optional and legacy
+            # PluginMetadata.extra['version'] preferred, then legacy or optional
             try:
-                version = plugin.module.__getattribute__("__help_version__")
+                version = plugin.metadata.extra.get('version', plugin.module.__getattribute__("__help_version__")) \
+                    if plugin.metadata else plugin.module.__getattribute__("__help_version__")
             except:
                 version = ""
-            plugin_names.append(f'{name} {version}')
+            plugin_names.append(f'{name} | {version}')
         plugin_names.sort()
         newline_char = '\n'
         result = f'已加载插件：\n{newline_char.join(plugin_names)}'
     else:
-        try:
-            plugin = nonebot.plugin.get_plugin(args[0])
-        except AttributeError:
-            result = f'{args[0]}插件不存在或未加载，请确认输入的是插件模块名（插件列表的第一部分名称）'
+        # package name
+        plugin = nonebot.plugin.get_plugin(arg)
+        # try nickname/helpname
+        if not plugin:
+            plugin_set = nonebot.plugin.get_loaded_plugins()
+            for temp_plugin in plugin_set:
+                try:
+                    name = temp_plugin.metadata.name if temp_plugin.metadata and temp_plugin.metadata.name \
+                        else temp_plugin.module.__getattribute__("__help_plugin_name__")
+                except:
+                    name = temp_plugin.name
+                if name == arg:
+                    plugin = temp_plugin
+        # not found
+        if not plugin:
+            result = f'{arg} 不存在或未加载，请确认输入了正确的插件名'
         else:
             results = []
             # if metadata set, use the general usage in metadata instead of legacy __usage__
@@ -96,6 +107,7 @@ async def get_result(event: Event, content: Message = Arg()):
                     [f'{key}: {value}' for key, value in infos.items()
                      if key and value]
                 )
+            results = list(filter(None, results))
             result = '\n'.join(results)
     await helper.finish(Message().append(at).append(
         MessageSegment.text(result)))
