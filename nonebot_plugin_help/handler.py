@@ -7,7 +7,8 @@ from nonebot.adapters import Message
 
 from .config import Config
 
-default_start = list(nonebot.get_driver().config.command_start)[0]
+command_starts = list(nonebot.get_driver().config.command_start)
+default_start = command_starts[0]
 plugin_config = Config.parse_obj(nonebot.get_driver().config)
 
 helper = on_command("help", priority=plugin_config.help_priority, aliases={"帮助"}, block=plugin_config.help_block)

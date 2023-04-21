@@ -46,7 +46,7 @@ __plugin_meta__ = nonebot.plugin.PluginMetadata(
 ```python
 # 您的插件版本号，将在/help list中显示
 # Deprecated for nonebot-plugin-help 0.3.1+, prefer PluginMetadata.extra['version']
-__help_version__ = '0.3.1'
+__help_version__ = '0.4.1'
 # 此名称有助于美化您的插件在/help list中的显示
 # 但使用/help xxx查询插件用途时仍必须使用包名
 # Deprecated for nonebot-plugin-help 0.3.0+, prefer PluginMetadata.name
@@ -87,7 +87,7 @@ helper.__doc__ = '您为此命令提供的帮助文本, 当您不希望使用__h
 @<user_who_send_command> 已加载插件：
 nonebot_plugin_cloverdata | 四叶草魔物娘属性计算插件 | 0.1.0
 nonebot_plugin_guild_patch 
-nonebot_plugin_help | Nonebot2 Help Menu | 0.3.1
+nonebot_plugin_help | Nonebot2 Help Menu | 0.4.1
 ```
 
 ### 查看已加载某一插件用途
