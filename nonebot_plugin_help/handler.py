@@ -3,10 +3,14 @@ from nonebot import on_command
 from nonebot.matcher import Matcher
 from nonebot.params import CommandArg, Arg
 from nonebot.adapters import Event
-from nonebot.adapters.onebot.v11.message import Message, MessageSegment
+from nonebot.adapters import Message
+
+from .config import Config
 
 default_start = list(nonebot.get_driver().config.command_start)[0]
-helper = on_command("help", priority=1, aliases={"帮助"})
+plugin_config = Config.parse_obj(nonebot.get_driver().config)
+
+helper = on_command("help", priority=plugin_config.help_priority, aliases={"帮助"}, block=plugin_config.help_block)
 # Matcher level info registering, still active in-use
 helper.__help_name__ = 'help'
 helper.__help_info__ = f'''{default_start}help  # 获取本插件帮助
@@ -16,21 +20,19 @@ helper.__help_info__ = f'''{default_start}help  # 获取本插件帮助
 
 @helper.handle()
 async def handle_first_receive(event: Event, matcher: Matcher, args: Message = CommandArg()):
-    at = MessageSegment.at(event.get_user_id())
     if args:
         matcher.set_arg("content", args)
     else:
-        await matcher.finish(Message(at + f'''欢迎使用Nonebot2 Help Menu
+        await matcher.finish(f'''欢迎使用Nonebot2 Help Menu
 支持使用的前缀：{" ".join(list(nonebot.get_driver().config.command_start))}
 {default_start}help  # 获取本插件帮助
 {default_start}help list  # 展示已加载插件列表
 {default_start}help <plugin_name>  # 调取目标插件帮助信息
-'''))
+''', at_sender=True)
 
 
 @helper.got("content")
 async def get_result(event: Event, content: Message = Arg()):
-    at = MessageSegment.at(event.get_user_id())
     arg = content.extract_plain_text().strip()
     if arg.lower() == "list":
         plugin_set = nonebot.plugin.get_loaded_plugins()
@@ -109,5 +111,4 @@ async def get_result(event: Event, content: Message = Arg()):
                 )
             results = list(filter(None, results))
             result = '\n'.join(results)
-    await helper.finish(Message().append(at).append(
-        MessageSegment.text(result)))
+    await helper.finish(result, at_sender=True)

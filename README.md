@@ -12,22 +12,21 @@
 <a href="https://pypi.python.org/pypi/nonebot-plugin-help">
     <img src="https://img.shields.io/pypi/dm/nonebot-plugin-help?style=for-the-badge" alt="pypi download">
 </a>
-<img src="https://img.shields.io/badge/python-3.7.3+-blue?style=for-the-badge" alt="python">
+<img src="https://img.shields.io/badge/require_python-3.8+-blue?style=for-the-badge" alt="python">
 <br />
-<img src="https://img.shields.io/badge/tested_python-3.8.10-blue?style=for-the-badge" alt="python">
-<img src="https://img.shields.io/static/v1?label=tested+env&message=go-cqhttp+1.0.0-rc1&color=blue&style=for-the-badge" alt="python">
-
-<br />
-<a href="https://github.com/botuniverse/onebot/blob/master/README.md">
-    <img src="https://img.shields.io/badge/Onebot-v11-brightgreen?style=for-the-badge" alt="onebot">
-</a>
-<a href="https://github.com/nonebot/nonebot2">
-    <img src="https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.4&color=red&style=for-the-badge" alt="nonebot">
-</a>
-<a href="https://pypi.org/project/nonebot-adapter-cqhttp/">
-    <img src="https://img.shields.io/static/v1?label=Nonebot-adapters-onebot&message=2.0.0%2Dbeta.1&color=red&style=for-the-badge" alt="nonebot-adapters-cqhttp">
-</a>
+<img src="https://img.shields.io/badge/tested_python-3.10.6-blue?style=for-the-badge" alt="python">
+<img src="https://img.shields.io/badge/tested_env-go_cqhttp_1.0.0-blue?style=for-the-badge" alt="python">
+<img src="https://img.shields.io/badge/tested_Nonebot-2.0.0_rc4-red?style=for-the-badge" alt="nonebot">
 </div>
+
+## 配置help插件优先级与阻塞（可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.4.0&color=red)
+0.4.0版本起，新增插件优先级与阻塞设置（可选），默认为`priority=1, block=False`
+
+用户可在.env配置文件内通过配置项`help_block`与`help_priority`进行配置，例如，以下配置可将help命令配置为`priority=100, block=True`
+```
+help_block = true
+help_priority = 100
+```
 
 ## 开发者接入此插件列表方法
 您可以直接参考本插件的接入方式，阅读源代码即可！
