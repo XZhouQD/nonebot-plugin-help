@@ -32,5 +32,5 @@ __plugin_meta__ = nonebot.plugin.PluginMetadata(
 {default_start}help list  # 展示已加载插件列表
 {default_start}help <插件名>  # 调取目标插件帮助信息
 ''',
-    extra={'version': '0.3.2'}
+    extra={'version': '0.4.0'}
 )
