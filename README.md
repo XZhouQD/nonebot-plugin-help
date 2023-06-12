@@ -23,9 +23,14 @@
 0.4.0版本起，新增插件优先级与阻塞设置（可选），默认为`priority=1, block=False`
 
 用户可在.env配置文件内通过配置项`help_block`与`help_priority`进行配置，例如，以下配置可将help命令配置为`priority=100, block=True`
+
+支持`ignore_plugins`配置，可配置不希望help插件列出的插件包名列表，例如，以下配置可忽略`nonebot_plugin_localstore`与`nonebot_plugin_apscheduler`插件
+支持`to_me`配置，可配置是否只有私聊或者艾特时才响应help命令
 ```
 help_block = true
 help_priority = 100
+ignore_plugins=["nonebot_plugin_localstore", "nonebot_plugin_apscheduler"]
+to_me=true
 ```
 
 ## 开发者接入此插件列表方法
