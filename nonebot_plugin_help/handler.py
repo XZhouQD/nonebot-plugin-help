@@ -4,6 +4,7 @@ from nonebot.matcher import Matcher
 from nonebot.params import CommandArg, Arg
 from nonebot.adapters import Event
 from nonebot.adapters import Message
+from nonebot.rule import to_me, Rule
 
 from .config import Config
 
@@ -11,7 +12,8 @@ command_starts = list(nonebot.get_driver().config.command_start)
 default_start = command_starts[0]
 plugin_config = Config.parse_obj(nonebot.get_driver().config)
 
-helper = on_command("help", priority=plugin_config.help_priority, aliases={"帮助"}, block=plugin_config.help_block)
+helper = on_command("help", priority=plugin_config.help_priority, aliases={"帮助"}, block=plugin_config.help_block,
+                    rule=to_me() if plugin_config.help_to_me else None)
 # Matcher level info registering, still active in-use
 helper.__help_name__ = 'help'
 helper.__help_info__ = f'''{default_start}help  # 获取本插件帮助
@@ -39,6 +41,8 @@ async def get_result(event: Event, content: Message = Arg()):
         plugin_set = nonebot.plugin.get_loaded_plugins()
         plugin_names = []
         for plugin in plugin_set:
+            if plugin.name in plugin_config.help_ignore_plugins:
+                continue
             # plugin.name, then metadata name or legacy help name
             name = f'{plugin.name} | '
             try:

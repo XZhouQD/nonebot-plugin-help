@@ -1,6 +1,7 @@
 <div align="center">
 
 # nonebot-plugin-help
+
 ### Nonebot2 轻量级帮助插件
 
 <a href="https://raw.githubusercontent.com/xzhouqd/nonebot-plugin-help/main/LICENSE">
@@ -19,19 +20,31 @@
 <img src="https://img.shields.io/badge/tested_Nonebot-2.0.0_rc4-red?style=for-the-badge" alt="nonebot">
 </div>
 
-## 配置help插件优先级与阻塞（可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.4.0&color=red)
-0.4.0版本起，新增插件优先级与阻塞设置（可选），默认为`priority=1, block=False`
+## 配置 help 插件优先级与阻塞（可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.4.0&color=red)
 
-用户可在.env配置文件内通过配置项`help_block`与`help_priority`进行配置，例如，以下配置可将help命令配置为`priority=100, block=True`
+0.4.0 版本起，新增插件优先级与阻塞设置（可选），默认为`priority=1, block=False`
+
+用户可在.env 配置文件内通过配置项`help_block`与`help_priority`进行配置，例如，以下配置可将 help 命令配置为`priority=100, block=True`
+
+0.6.0 版本起，新增忽略插件与`to_me`规则（可选），`help_ignore_plugins`默认不忽略任何插件，`to_me`默认值为`False`。  
+`help_ignore_plugins`：可配置不希望 help 插件列出的插件包名列表，例如，以下配置可忽略`nonebot_plugin_localstore`与`nonebot_plugin_apscheduler`插件。  
+`help_to_me`：可配置是否只有私聊或者艾特时才响应 help 命令。
+
 ```
 help_block = true
 help_priority = 100
+help_ignore_plugins=["nonebot_plugin_localstore", "nonebot_plugin_apscheduler"]
+help_to_me=true
 ```
 
 ## 开发者接入此插件列表方法
+
 您可以直接参考本插件的接入方式，阅读源代码即可！
+
 ### 插件级别元数据接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.4&color=red)
-使用自 **Nonebot 2.0.0-beta.4** 版本起新增的插件元数据进行插件级统一接入（不包含Matcher级别接入）
+
+使用自 **Nonebot 2.0.0-beta.4** 版本起新增的插件元数据进行插件级统一接入（不包含 Matcher 级别接入）
+
 ```python
 # New way of self registering (use PluginMetadata)
 __plugin_meta__ = nonebot.plugin.PluginMetadata(
@@ -41,8 +54,11 @@ __plugin_meta__ = nonebot.plugin.PluginMetadata(
     extra={'version': '0.3.1'}
 )
 ```
+
 ### 插件级别传统接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red)
-使用python包形态的插件（已发布/自行开发皆可），并在插件包的__init__.py文件内增加如下代码：
+
+使用 python 包形态的插件（已发布/自行开发皆可），并在插件包的**init**.py 文件内增加如下代码：
+
 ```python
 # 您的插件版本号，将在/help list中显示
 # Deprecated for nonebot-plugin-help 0.3.1+, prefer PluginMetadata.extra['version']
@@ -55,8 +71,11 @@ __help_plugin_name__ = "您的插件名称（有别于nonebot-plugin-xxx的包�
 # 若此文本不存在，将显示包的__doc__
 __usage__ = '您想在使用命令/help <your plugin package name>时提供的帮助文本'
 ```
-### Matcher级别接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red)
-Matcher级别帮助请为Matcher添加如下代码：
+
+### Matcher 级别接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red)
+
+Matcher 级别帮助请为 Matcher 添加如下代码：
+
 ```python
 default_start = list(nonebot.get_driver().config.command_start)[0]
 helper = on_command("help", priority=1, aliases={"帮助"})
@@ -64,14 +83,19 @@ helper.__help_name__ = '您的命令触发指令名'
 helper.__help_info__ = '您为此命令提供的帮助文本'
 helper.__doc__ = '您为此命令提供的帮助文本, 当您不希望使用__help_info__提供时，可以使用__doc__提供'
 ```
-请注意：当您未提供`__help_name__`或`__help_info__`与`__doc__`中的一个时，此Matcher不会列入Matcher级别帮助！
+
+请注意：当您未提供`__help_name__`或`__help_info__`与`__doc__`中的一个时，此 Matcher 不会列入 Matcher 级别帮助！
 
 ## 实际使用
-此部分介绍以使用'/'作为command_start为例。
+
+此部分介绍以使用'/'作为 command_start 为例。
+
 ### 获取本插件帮助
+
 指令： /help
 
 返回示例：
+
 ```
 @<user_who_send_command> 欢迎使用Nonebot2 Help Menu
 支持使用的前缀：/
@@ -79,20 +103,25 @@ helper.__doc__ = '您为此命令提供的帮助文本, 当您不希望使用__h
 /help list  # 展示已加载插件列表
 /help <plugin_name>  # 调取目标插件帮助信息
 ```
+
 ### 查看已加载插件列表
+
 指令：/help list
 
 返回示例：
+
 ```
 @<user_who_send_command> 已加载插件：
 nonebot_plugin_cloverdata | 四叶草魔物娘属性计算插件 | 0.1.0
-nonebot_plugin_guild_patch 
+nonebot_plugin_guild_patch
 nonebot_plugin_help | Nonebot2 Help Menu | 0.4.1
 ```
 
 ### 查看已加载某一插件用途
+
 指令：/help <plugin_package_name | plugin_help_name>
 示例：
+
 ```
 /help nonebot_plugin_help
 
@@ -111,7 +140,9 @@ nonebot_plugin_help | Nonebot2 Help Menu | 0.4.1
 /help list  # 展示已加载插件列表
 /help <plugin_name>  # 调取目标插件帮助信息
 ```
+
 或使用提供的插件美化名示例：
+
 ```
 /help Nonebot2 Help Menu
 
@@ -131,7 +162,8 @@ nonebot_plugin_help | Nonebot2 Help Menu | 0.4.1
 /help <plugin_name>  # 调取目标插件帮助信息
 ```
 
-若插件未提供__usage__，则会显示__doc__，示例：
+若插件未提供**usage**，则会显示**doc**，示例：
+
 ```
 /help nonebot_plugin_help
 
