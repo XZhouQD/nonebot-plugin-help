@@ -4,7 +4,7 @@ from nonebot.matcher import Matcher
 from nonebot.params import CommandArg, Arg
 from nonebot.adapters import Event
 from nonebot.adapters import Message
-from nonebot.rule import to_me, Rule
+from nonebot.rule import to_me
 
 from .config import Config
 
