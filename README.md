@@ -20,19 +20,27 @@
 <img src="https://img.shields.io/badge/tested_Nonebot-2.0.0_rc4-red?style=for-the-badge" alt="nonebot">
 </div>
 
-## 配置 help 插件优先级与阻塞（可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.4.0&color=red)
+## Bot可对本插件进行的配置
+
+### 配置 help 插件优先级与阻塞（可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.4.0&color=red)
 
 0.4.0 版本起，新增插件优先级与阻塞设置（可选），默认为`priority=1, block=False`
 
 用户可在.env 配置文件内通过配置项`help_block`与`help_priority`进行配置，例如，以下配置可将 help 命令配置为`priority=100, block=True`
 
-0.6.0 版本起，新增忽略插件与`to_me`规则（可选），`help_ignore_plugins`默认不忽略任何插件，`to_me`默认值为`False`。  
-`help_ignore_plugins`：可配置不希望 help 插件列出的插件包名列表，例如，以下配置可忽略`nonebot_plugin_localstore`与`nonebot_plugin_apscheduler`插件。  
-`help_to_me`：可配置是否只有私聊或者艾特时才响应 help 命令。
-
 ```
 help_block = true
 help_priority = 100
+```
+
+### 配置 help 插件忽略列表与`to_me`规则（可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.6.0&color=red)
+
+0.6.0 版本起，新增忽略插件与`to_me`规则（可选），`help_ignore_plugins`默认不忽略任何插件，`to_me`默认值为`False`。  
+
+`help_ignore_plugins`：可配置不希望 help 插件列出的插件包名列表，例如，以下配置可忽略`nonebot_plugin_localstore`与`nonebot_plugin_apscheduler`插件。  
+`help_to_me`：可配置是否只有私聊或提及Bot时才响应 help 命令。
+
+```
 help_ignore_plugins=["nonebot_plugin_localstore", "nonebot_plugin_apscheduler"]
 help_to_me=true
 ```
@@ -41,7 +49,7 @@ help_to_me=true
 
 您可以直接参考本插件的接入方式，阅读源代码即可！
 
-### 插件级别元数据接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.4&color=red)
+### 插件级别元数据接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.4&color=red) ![In Use](https://img.shields.io/static/v1?label=Status&message=In%2DUse%26Preferred&color=green)
 
 使用自 **Nonebot 2.0.0-beta.4** 版本起新增的插件元数据进行插件级统一接入（不包含 Matcher 级别接入）
 
@@ -51,18 +59,21 @@ __plugin_meta__ = nonebot.plugin.PluginMetadata(
     name='您的插件名称（有别于nonebot-plugin-xxx的包名）',
     description='您的简单插件描述',
     usage='''您想在使用命令/help <your plugin package name>时提供的帮助文本''',
-    extra={'version': '0.3.1'}
+    type='{插件分类}', # From 2.0.0 Stable Version, 发布必填，当前有效类型有：`library`（为其他插件编写提供功能），`application`（向机器人用户提供功能）。
+    homepage='{项目主页}', # From 2.0.0 Stable Version
+    config=Config, # From 2.0.0 Stable Version, 插件配置项类，如无需配置可不填写。
+    extra={'version': '0.6.0'}
 )
 ```
 
-### 插件级别传统接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red)
+### 插件级别传统接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red) ![Deprecated](https://img.shields.io/static/v1?label=Status&message=deprecated)
 
 使用 python 包形态的插件（已发布/自行开发皆可），并在插件包的**init**.py 文件内增加如下代码：
 
 ```python
 # 您的插件版本号，将在/help list中显示
 # Deprecated for nonebot-plugin-help 0.3.1+, prefer PluginMetadata.extra['version']
-__help_version__ = '0.4.1'
+__help_version__ = '0.6.0'
 # 此名称有助于美化您的插件在/help list中的显示
 # 但使用/help xxx查询插件用途时仍必须使用包名
 # Deprecated for nonebot-plugin-help 0.3.0+, prefer PluginMetadata.name
@@ -72,7 +83,7 @@ __help_plugin_name__ = "您的插件名称（有别于nonebot-plugin-xxx的包�
 __usage__ = '您想在使用命令/help <your plugin package name>时提供的帮助文本'
 ```
 
-### Matcher 级别接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red)
+### Matcher 级别接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red) ![In Use](https://img.shields.io/static/v1?label=Status&message=In%2DUse&color=green)
 
 Matcher 级别帮助请为 Matcher 添加如下代码：
 
