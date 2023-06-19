@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nonebot-plugin-help"
-version = "0.5.0"
+version = "0.6.0"
 description = "A general help lister for nonebot2 plugins"
 authors = ["XZhouQD <X.Zhou.QD@hotmail.com>"]
 license = "AGPL v3"
