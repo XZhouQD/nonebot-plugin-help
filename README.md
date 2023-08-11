@@ -22,6 +22,15 @@
 
 ## Bot可对本插件进行的配置
 
+### 配置 help 插件是否at发送者（重要，可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.6.1&color=red)
+
+0.6.1 版本起，新增是否at发送者配置，适用于adapter不支持at_sender的用户，如KOOK
+
+可在.env配置文件内通过配置项`help_at_sender`配置，例如：
+```
+help_at_sender = false
+```
+
 ### 配置 help 插件优先级与阻塞（可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.4.0&color=red)
 
 0.4.0 版本起，新增插件优先级与阻塞设置（可选），默认为`priority=1, block=False`
