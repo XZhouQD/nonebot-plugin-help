@@ -11,6 +11,7 @@ from .config import Config
 command_starts = list(nonebot.get_driver().config.command_start)
 default_start = command_starts[0]
 plugin_config = Config.parse_obj(nonebot.get_driver().config)
+enable_at_sender = plugin_config.help_at_sender
 
 helper = on_command("help", priority=plugin_config.help_priority, aliases={"帮助"}, block=plugin_config.help_block,
                     rule=to_me() if plugin_config.help_to_me else None)
@@ -26,12 +27,16 @@ async def handle_first_receive(event: Event, matcher: Matcher, args: Message = C
     if args:
         matcher.set_arg("content", args)
     else:
-        await matcher.finish(f'''欢迎使用Nonebot2 Help Menu
+        result = f'''欢迎使用Nonebot2 Help Menu
 支持使用的前缀：{" ".join(list(nonebot.get_driver().config.command_start))}
 {default_start}help  # 获取本插件帮助
 {default_start}help list  # 展示已加载插件列表
 {default_start}help <plugin_name>  # 调取目标插件帮助信息
-''', at_sender=True)
+'''
+        if enable_at_sender:
+            await matcher.finish(result, at_sender=True)
+        else:
+            await matcher.finish(result)
 
 
 @helper.got("content")
@@ -116,4 +121,7 @@ async def get_result(event: Event, content: Message = Arg()):
                 )
             results = list(filter(None, results))
             result = '\n'.join(results)
-    await helper.finish(result, at_sender=True)
+    if enable_at_sender:
+        await helper.finish(result, at_sender=True)
+    else:
+        await helper.finish(result)

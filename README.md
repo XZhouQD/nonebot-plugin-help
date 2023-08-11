@@ -22,6 +22,15 @@
 
 ## Bot可对本插件进行的配置
 
+### 配置 help 插件是否at发送者（重要，可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.6.1&color=red)
+
+0.6.1 版本起，新增是否at发送者配置，适用于adapter不支持at_sender的用户，如KOOK
+
+可在.env配置文件内通过配置项`help_at_sender`配置，例如：
+```
+help_at_sender = false
+```
+
 ### 配置 help 插件优先级与阻塞（可选） ![nonebot-plugin-help](https://img.shields.io/static/v1?label=nonebot-plugin-help&message=0.4.0&color=red)
 
 0.4.0 版本起，新增插件优先级与阻塞设置（可选），默认为`priority=1, block=False`
@@ -49,7 +58,7 @@ help_to_me=true
 
 您可以直接参考本插件的接入方式，阅读源代码即可！
 
-### 插件级别元数据接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.4&color=red) ![In Use](https://img.shields.io/static/v1?label=Status&message=In%2DUse%26Preferred&color=green)
+### 插件级别元数据接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.4&color=red)
 
 使用自 **Nonebot 2.0.0-beta.4** 版本起新增的插件元数据进行插件级统一接入（不包含 Matcher 级别接入）
 
@@ -66,7 +75,7 @@ __plugin_meta__ = nonebot.plugin.PluginMetadata(
 )
 ```
 
-### 插件级别传统接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red) ![Deprecated](https://img.shields.io/static/v1?label=Status&message=deprecated)
+### 插件级别传统接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red)
 
 使用 python 包形态的插件（已发布/自行开发皆可），并在插件包的**init**.py 文件内增加如下代码：
 
@@ -83,7 +92,7 @@ __help_plugin_name__ = "您的插件名称（有别于nonebot-plugin-xxx的包�
 __usage__ = '您想在使用命令/help <your plugin package name>时提供的帮助文本'
 ```
 
-### Matcher 级别接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red) ![In Use](https://img.shields.io/static/v1?label=Status&message=In%2DUse&color=green)
+### Matcher 级别接入 ![nonebot2](https://img.shields.io/static/v1?label=Nonebot&message=2.0.0%2Dbeta.1&color=red)
 
 Matcher 级别帮助请为 Matcher 添加如下代码：
 
