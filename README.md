@@ -1,5 +1,8 @@
 <div align="center">
 
+# Archived
+No further development in this repo.
+
 # nonebot-plugin-help
 
 ### Nonebot2 轻量级帮助插件
